@@ -8,7 +8,7 @@ Uses Express for the REST API.
 
 <table>
 	<tr>
-		<td>**Method**</td><td>**URL**</td><td>**Action**</td>
+		<td>######Method</td><td>######URL</td><td>######Action</td>
 	</tr>
 	<tr>
 		<td>GET</td><td>/runners</td><td>Retrieve all runners</td>
