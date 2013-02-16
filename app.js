@@ -3,7 +3,7 @@ mongoose = require('mongoose'),
 passport = require('passport'),
 runners = require('./routes/runners'),
 runs = require('./routes/runs'),
-auth = require('./routes/authentication');
+auth = require('./authentication');
 
 var app = express();
 
@@ -11,14 +11,17 @@ mongoose.connect(process.env.BUDDYMONGO || 'mongodb://localhost/buddyolympics');
 
 app.configure(function(){
 	app.use(express.bodyParser());
+	app.use(express.cookieParser());
+	app.use(express.session({ secret: 'hattifnatt' }));
 	app.use(passport.initialize());
+	app.use(passport.session());
 });
 
 app.get('/runners', runners.findAll);
 app.get('/runners/:id', runners.findById);
 app.post('/runners', runners.addRunner);
-app.put('/runners/:id', runners.updateRunner);
-app.delete('/runners/:id', runners.deleteRunner);
+app.put('/runners/:id', auth.ensureAuthenticatedRunner, runners.updateRunner);
+app.delete('/runners/:id', auth.ensureAuthenticatedRunner, runners.deleteRunner);
 
 app.get('/runs', runs.findAll);
 app.get('/runs/:id', runs.findById);
