@@ -41,3 +41,52 @@ Uses Express for the REST API.
 		<td>DELETE</td><td>/runs/:id</td><td>Delete the run with the specified :id</td>
 	</tr>
 </table>
+
+### Models
+
+#### Runners
+
+The Runners model represents a Buddy Olympics user.
+
+> username : String,
+> password : String,
+> fullname : String,
+> email : String,
+> birthday : Date,
+> gender : String,
+> country : String,
+> city : String,
+> datejoined : Date,
+> rank : Number,
+> interests : String,
+> ambition : String,
+> description : String,
+> profilepic : String,
+> friends : [ObjectId],
+> achievements : [ObjectId],
+> runs : [ObjectId]
+
+#### Runs
+
+The Runs model represents a run in Buddy Olympics. 
+
+> starttime : Date,
+> type : {
+> 	time : Number,
+>	distance : Number,
+>	avgspeed : Number,
+>	topspeed : Number
+> },
+> participants : [{
+>	runner : ObjectId,
+>	time : Number,
+>	distance : Number,
+>	owner : Boolean,
+>	coordinates : [{
+>		longitude : Number,
+>		latitude : Number,
+>		timestamp : Number
+>	}]
+> }],
+> finished : Boolean,
+> winner : ObjectId
