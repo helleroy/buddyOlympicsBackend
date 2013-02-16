@@ -1,10 +1,10 @@
-buddyOlympicsBackend
-====================
+Buddy Olympics Backend
+======================
 
 Node.js based backend for the Buddy Olympics app.
 Uses Express for the REST API.
 
-## REST API
+### REST API
 
 <table>
 	<tr>
