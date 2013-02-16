@@ -14,6 +14,7 @@ var runSchema = mongoose.Schema({
 		time : Number,
 		distance : Number,
 		owner : Boolean,
+		finished : Boolean,
 		coordinates : [{
 			longitude : Number,
 			latitude : Number,

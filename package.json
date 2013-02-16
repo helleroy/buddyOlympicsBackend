@@ -1,7 +1,7 @@
 {
 	"name" : "buddy-olympics-server",
 	"description" : "Buddy Olympics REST API",
-	"version" : "0.0.1",
+	"version" : "0.1.0",
 	"contributors" : [
 	{
 		"name" : "Henrik Hellerøy",

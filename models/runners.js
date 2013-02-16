@@ -5,10 +5,10 @@ ObjectId = mongoose.Schema.Types.ObjectId;
 var SALT_ROUNDS = 10;
 
 var runnerSchema = mongoose.Schema({
-	username : String,
-	password : String,
+	username : {type : String, unique : true, required : true},
+	password : {type : String, required : true},
 	fullname : String,
-	email : String,
+	email : {type : String, unique : true, required : true},
 	birthday : Date,
 	gender : String,
 	country : String,

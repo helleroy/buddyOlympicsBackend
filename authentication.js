@@ -1,4 +1,4 @@
-var Runners = require('../models/runners'),
+var Runners = require('./models/runners'),
 passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
 

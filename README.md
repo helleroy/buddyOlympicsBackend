@@ -48,10 +48,10 @@ Uses Express for the REST API.
 
 The Runners model represents a Buddy Olympics user.
 ```
-username : String,
-password : String,
+username : {type : String, unique : true, required : true},
+password : {type : String, required : true},
 fullname : String,
-email : String,
+email : {type : String, unique : true, required : true},
 birthday : Date,
 gender : String,
 country : String,
@@ -82,6 +82,7 @@ participants : [{
 	time : Number,
 	distance : Number,
 	owner : Boolean,
+	finished : Boolean,
 	coordinates : [{
 		longitude : Number,
 		latitude : Number,
