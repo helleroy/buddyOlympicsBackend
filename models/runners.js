@@ -19,9 +19,10 @@ var runnerSchema = mongoose.Schema({
 	ambition : String,
 	description : String,
 	profilepic : String,
-	friends : [ObjectId],
+	friends : [{type : ObjectId, ref : 'Runner'}],
 	achievements : [ObjectId],
-	runs : [ObjectId]
+	runs : [{type : ObjectId, ref : 'Run'}],
+	newruns : [{type : ObjectId, ref : 'Run'}]
 });
 
 runnerSchema.statics.findAll = function(cb) {

@@ -3,12 +3,12 @@ passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
 
 exports.login = function(req, res) {
-	console.log('LOGIN');
+	console.log('LOGIN: ' + req.user.username);
 	res.send(req.user);
 };
 
 exports.logout = function(req, res) {
-	console.log('LOGOUT');
+	console.log('LOGOUT: ' + req.user.username);
 	req.logout();
 	res.send(200);
 };
@@ -26,14 +26,14 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-	User.findById(id, function(err, user) {
+	Runners.findById(id, function(err, user) {
 		done(err, user);
 	});
 });
 
 passport.use(new LocalStrategy(
 	function(username, password, done) {
-		Runners.findOne({ username: username }, function (err, runner) {
+		Runners.findOne({ username: username }).populate('newruns').exec(function (err, runner) {
 			if (err) { return done(err); }
 			if (!runner) {
 				return done(null, false, { message: 'Incorrect username.' });
@@ -41,7 +41,6 @@ passport.use(new LocalStrategy(
 			if (!runner.validPassword(password)) {
 				return done(null, false, { message: 'Incorrect password.' });
 			}
-			runner.password = null;
 			return done(null, runner);
 		});
 	})

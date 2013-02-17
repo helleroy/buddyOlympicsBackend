@@ -1,8 +1,7 @@
 Buddy Olympics Backend
 ======================
 
-Node.js based backend for the Buddy Olympics app.
-Uses Express for the REST API.
+Node.js backend for the Buddy Olympics app. Uses Express and Mongoose for the REST API.
 
 ### REST API
 
@@ -62,9 +61,10 @@ interests : String,
 ambition : String,
 description : String,
 profilepic : String,
-friends : [ObjectId],
+friends : [{type : ObjectId, ref : 'Runner'}],
 achievements : [ObjectId],
-runs : [ObjectId]
+runs : [{type : ObjectId, ref : 'Run'}],
+newruns : [{type : ObjectId, ref : 'Run'}]
 ```
 #### Runs
 
@@ -78,9 +78,10 @@ type : {
 	topspeed : Number
 },
 participants : [{
-	runner : ObjectId,
+	runner : {type : ObjectId, ref : 'Runner'},
 	time : Number,
 	distance : Number,
+	accept : Boolean,
 	owner : Boolean,
 	finished : Boolean,
 	coordinates : [{
@@ -90,5 +91,5 @@ participants : [{
 	}]
 }],
 finished : Boolean,
-winner : ObjectId
+winner : {type : ObjectId, ref : 'Runner'}
 ```
