@@ -32,6 +32,8 @@ app.get('/runs', runs.findAll);
 app.get('/runs/:id', runs.findById);
 app.post('/runs', runs.addRun);
 app.put('/runs/:id', runs.updateRun);
+app.put('/runs/:runId/accept/:id', runs.acceptRun);
+app.put('/runs/:runId/coords/:id', runs.pushCoords);
 app.delete('/runs/:id', runs.deleteRun);
 
 app.post('/login', auth.authenticate, auth.login);

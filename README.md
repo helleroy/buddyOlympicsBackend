@@ -37,6 +37,12 @@ Node.js backend for the Buddy Olympics app. Uses Express and Mongoose for the RE
 		<td>PUT</td><td>/runs/:id</td><td>Update the run with the specified :id</td>
 	</tr>
 	<tr>
+		<td>PUT</td><td>/runs/:runId/accept/:id</td><td>Set accept to true on a run with the specified :runId for the participant with the specified :id</td>
+	</tr>
+	<tr>
+		<td>PUT</td><td>/runs/:runId/coords/:id</td><td>Pushes coordinates from the runner with the specified :id to the run with the specified :runId</td>
+	</tr>
+	<tr>
 		<td>DELETE</td><td>/runs/:id</td><td>Delete the run with the specified :id</td>
 	</tr>
 </table>
@@ -70,7 +76,9 @@ newruns : [{type : ObjectId, ref : 'Run'}]
 
 The Runs model represents a run in Buddy Olympics. 
 ```
+title : String,
 starttime : Date,
+owner : {type : ObjectId, ref : 'Runner'},
 type : {
 	time : Number,
 	distance : Number,
@@ -78,18 +86,20 @@ type : {
 	topspeed : Number
 },
 participants : [{
-	runner : {type : ObjectId, ref : 'Runner'},
+	runner : {type : ObjectId, ref : 'Runner', required : true},
 	time : Number,
 	distance : Number,
 	accept : Boolean,
-	owner : Boolean,
 	finished : Boolean,
 	coordinates : [{
 		longitude : Number,
 		latitude : Number,
-		timestamp : Number
+		timestamp : Date
 	}]
 }],
 finished : Boolean,
 winner : {type : ObjectId, ref : 'Runner'}
 ```
+
+Copyright (c) 2013 Henrik Hellerøy, https://github.com/helleroy/
+Licensed under the MIT license, http://opensource.org/licenses/MIT

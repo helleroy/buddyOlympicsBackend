@@ -23,8 +23,8 @@ exports.findById = function(req, res) {
 			console.log(err);
 			res.send(500);
 		} else {
-			console.log('GET RUN: ' + runs);
-			res.send(runs);
+			console.log('GET RUN: ' + run);
+			res.send(run);
 		}
 	});
 };
@@ -51,6 +51,32 @@ exports.updateRun = function(req, res) {
 			console.log('PUT RUN: ' + run);
 			res.send(200);
 		}
+	});
+};
+
+exports.acceptRun = function(req, res) {
+	Runs.update({_id : req.params.runId, 'participants.runner' : req.params.id}, 
+		{$set : {'participants.$.accept' : true}}, function(err) {
+		if (err) {
+			console.log(err);
+			res.send(500);
+		} else {
+			console.log('PUT RUN ACCEPT');
+			res.send(200);
+		}
+	});
+};
+
+exports.pushCoords = function(req, res) {
+	Runs.update({_id : req.params.runid, 'participants.runner' : req.params.id}, 
+		{$push : {'participants.$.coordinates' : req.body.coordinates }}, function(err) {
+			if (err) {
+				console.log(err);
+				res.send(500);
+			} else {
+				console.log('PUT RUN COORDS');
+				res.send(200);
+			}
 	});
 };
 

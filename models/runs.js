@@ -8,7 +8,9 @@ Runners = require('../models/runners'),
 ObjectId = mongoose.Schema.Types.ObjectId;
 
 var runSchema = mongoose.Schema({
+	title : String,
 	starttime : Date,
+	owner : {type : ObjectId, ref : 'Runner'},
 	type : {
 		time : Number,
 		distance : Number,
@@ -16,16 +18,15 @@ var runSchema = mongoose.Schema({
 		topspeed : Number
 	},
 	participants : [{
-		runner : {type : ObjectId, ref : 'Runner'},
+		runner : {type : ObjectId, ref : 'Runner', required : true},
 		time : Number,
 		distance : Number,
 		accept : Boolean,
-		owner : Boolean,
 		finished : Boolean,
 		coordinates : [{
 			longitude : Number,
 			latitude : Number,
-			timestamp : Number
+			timestamp : Date
 		}]
 	}],
 	finished : Boolean,
